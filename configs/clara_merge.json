@@ -1,0 +1,51 @@
+{
+  "merge_method": "linear",
+  "slices": [
+    {
+      "sources": [
+        {
+          "model": "./models/tinyllama_warm",
+          "layer_range": [
+            0,
+            22
+          ],
+          "parameters": {
+            "weight": 0.8
+          }
+        },
+        {
+          "model": "./models/tinyllama_casual",
+          "layer_range": [
+            0,
+            22
+          ],
+          "parameters": {
+            "weight": 0.3
+          }
+        },
+        {
+          "model": "./models/tinyllama_moderate_verbose",
+          "layer_range": [
+            0,
+            22
+          ],
+          "parameters": {
+            "weight": 0.6
+          }
+        },
+        {
+          "model": "./models/tinyllama_encouraging",
+          "layer_range": [
+            0,
+            22
+          ],
+          "parameters": {
+            "weight": 0.9
+          }
+        }
+      ]
+    }
+  ],
+  "dtype": "float16",
+  "out_dtype": "float16"
+}

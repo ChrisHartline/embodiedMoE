@@ -1,0 +1,15 @@
+# Non-PyTorch dependencies
+numpy>=1.24.0
+scipy>=1.10.0
+transformers>=4.40.0
+datasets>=2.14.0
+accelerate>=0.27.0
+sentencepiece>=0.1.99
+anthropic>=0.28.0
+python-dotenv>=1.0.0
+tqdm>=4.65.0
+
+# Note: Install PyTorch separately with:
+# pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
+
+mergekit>=0.2.4

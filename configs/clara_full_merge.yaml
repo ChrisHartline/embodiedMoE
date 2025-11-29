@@ -1,0 +1,33 @@
+merge_method: linear
+dtype: float16
+out_dtype: float16
+slices:
+  - sources:
+      - model: models\tinyllama_warmth
+        layer_range: [0, 22]
+        parameters:
+          weight: 0.8
+      - model: models\tinyllama_formality
+        layer_range: [0, 22]
+        parameters:
+          weight: 0.3
+      - model: models\tinyllama_verbosity
+        layer_range: [0, 22]
+        parameters:
+          weight: 0.6
+      - model: models\tinyllama_encouragement
+        layer_range: [0, 22]
+        parameters:
+          weight: 0.9
+      - model: models\tinyllama_robotics
+        layer_range: [0, 22]
+        parameters:
+          weight: 0.8
+      - model: models\tinyllama_python_programming
+        layer_range: [0, 22]
+        parameters:
+          weight: 0.6
+      - model: models\tinyllama_teaching
+        layer_range: [0, 22]
+        parameters:
+          weight: 0.7
