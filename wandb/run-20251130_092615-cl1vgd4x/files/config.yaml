@@ -1,0 +1,52 @@
+_wandb:
+    value:
+        cli_version: 0.23.0
+        e:
+            ylxu8u3q2otqf004eqlmmwemjs1tae25:
+                codePath: wandb_test.py
+                codePathLocal: wandb_test.py
+                cpu_count: 8
+                cpu_count_logical: 8
+                cudaVersion: "13.0"
+                disk:
+                    /:
+                        total: "2000381014016"
+                        used: "233333682176"
+                email: chris.hartline.99@gmail.com
+                executable: V:\Anaconda\python.exe
+                git:
+                    commit: 347b08c98349275d1443e9869cbb0e093a8ccf76
+                    remote: https://github.com/ChrisHartline/embodiedMoE.git
+                gpu: NVIDIA GeForce RTX 2080 SUPER
+                gpu_count: 1
+                gpu_nvidia:
+                    - architecture: Turing
+                      cudaCores: 3072
+                      memoryTotal: "8589934592"
+                      name: NVIDIA GeForce RTX 2080 SUPER
+                      uuid: GPU-104a0c52-6df0-bb86-3a93-747fdee861b1
+                host: Aurora
+                memory:
+                    total: "68536393728"
+                os: Windows-11-10.0.26100-SP0
+                program: V:\ProjectsGit\clara-prototype\wandb_test.py
+                python: CPython 3.12.7
+                root: V:\ProjectsGit\clara-prototype
+                startedAt: "2025-11-30T15:26:15.035897Z"
+                writerId: ylxu8u3q2otqf004eqlmmwemjs1tae25
+        m: []
+        python_version: 3.12.7
+        t:
+            "1":
+                - 105
+            "2":
+                - 105
+            "3":
+                - 2
+                - 13
+            "4": 3.12.7
+            "5": 0.23.0
+            "8":
+                - 3
+            "12": 0.23.0
+            "13": windows-amd64

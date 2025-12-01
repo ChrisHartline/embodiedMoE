@@ -1,0 +1,19 @@
+{
+  "personality": {
+    "warmth": 0.8,
+    "playful": 0.7,
+    "formal": 0.3,
+    "encouragement": 0.9
+  },
+  "expertise": {
+    "medical": 0.7,
+    "coding": 0.8,
+    "teaching": 0.9,
+    "quantum": 0.8
+  },
+  "config": {
+    "base_model": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+    "examples_per_dimension": 1000,
+    "merge_method": "ties"
+  }
+}
