@@ -139,30 +139,40 @@ class FalkorDBSessionStore:
 
     Uses Redis protocol for fast key-value access and
     Cypher queries for graph traversal.
+
+    Default connection (ClaraLily container):
+    - Host: localhost
+    - Port: 32758 (mapped from container 6378)
+    - Graph: clara
     """
 
+    # Default connection for ClaraLily container
+    DEFAULT_HOST = "localhost"
+    DEFAULT_PORT = 32758  # Docker mapping: 32758:6378
+    DEFAULT_GRAPH = "clara"
+
     def __init__(self,
-                 host: str = "localhost",
-                 port: int = 6379,
-                 graph_name: str = "clara",
+                 host: str = None,
+                 port: int = None,
+                 graph_name: str = None,
                  ttl_seconds: int = 3600,
                  debug: bool = False):
         """
         Initialize FalkorDB session store.
 
         Args:
-            host: FalkorDB host
-            port: FalkorDB port (default Redis port)
-            graph_name: Name of the graph to use
+            host: FalkorDB host (default: localhost)
+            port: FalkorDB port (default: 32758 for ClaraLily container)
+            graph_name: Name of the graph to use (default: clara)
             ttl_seconds: Session TTL
             debug: Enable debug output
         """
         if not HAS_FALKORDB:
             raise ImportError("falkordb package required. Install with: pip install falkordb")
 
-        self.host = host
-        self.port = port
-        self.graph_name = graph_name
+        self.host = host or self.DEFAULT_HOST
+        self.port = port or self.DEFAULT_PORT
+        self.graph_name = graph_name or self.DEFAULT_GRAPH
         self.ttl = ttl_seconds
         self.debug = debug
 
@@ -425,13 +435,18 @@ class SessionMemory:
     1. FalkorDB if available and configured
     2. Redis if available
     3. In-memory fallback
+
+    Default connection (ClaraLily container):
+    - Host: localhost
+    - Port: 32758
+    - Graph: clara
     """
 
     def __init__(self,
                  backend: str = "auto",
-                 host: str = "localhost",
-                 port: int = 6379,
-                 graph_name: str = "clara",
+                 host: str = None,
+                 port: int = None,
+                 graph_name: str = None,
                  ttl_seconds: int = 3600,
                  max_turns: int = 20,
                  debug: bool = False):
@@ -440,15 +455,20 @@ class SessionMemory:
 
         Args:
             backend: "falkordb", "redis", "memory", or "auto"
-            host: Database host
-            port: Database port
-            graph_name: FalkorDB graph name
+            host: Database host (default: localhost)
+            port: Database port (default: 32758 for ClaraLily)
+            graph_name: FalkorDB graph name (default: clara)
             ttl_seconds: Session TTL
             max_turns: Max turns to keep in session
             debug: Enable debug output
         """
         self.max_turns = max_turns
         self.debug = debug
+
+        # Use FalkorDB defaults
+        host = host or FalkorDBSessionStore.DEFAULT_HOST
+        port = port or FalkorDBSessionStore.DEFAULT_PORT
+        graph_name = graph_name or FalkorDBSessionStore.DEFAULT_GRAPH
 
         # Select backend
         if backend == "auto":
@@ -468,16 +488,18 @@ class SessionMemory:
                 debug=debug
             )
             self.has_graph = True
+            print(f"   SessionMemory initialized (FalkorDB: {host}:{port}/{graph_name})")
         elif backend == "redis":
             # TODO: Implement Redis-only store
             self.store = InMemorySessionStore(ttl_seconds=ttl_seconds)
             self.has_graph = False
+            print(f"   SessionMemory initialized (in-memory fallback, Redis TODO)")
         else:
             self.store = InMemorySessionStore(ttl_seconds=ttl_seconds)
             self.has_graph = False
+            print(f"   SessionMemory initialized (in-memory)")
 
         self.backend = backend
-        print(f"   SessionMemory initialized (backend: {backend})")
 
     async def start_session(self,
                             session_id: Optional[str] = None,
